@@ -106,7 +106,8 @@ class EnemyEntity(MovingAnimatingEntity):
 
     def update(self, gamearea, env=None):
 	    MovingAnimatingEntity.update(self, gamearea, env)
-        
+        if env:
+            self.CollideEntities(env.entities)
 
 class AnimatingEntity(Entity):
     def __init__(self, images, frametime, etype=ENT_OBSTACLE):
