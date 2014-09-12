@@ -68,10 +68,11 @@ class BulletEntity(MovingAnimatingEntity):
         MovingAnimatingEntity.update(self, gamearea, env)
 
 class EnemyEntity(MovingAnimatingEntity):
-    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, health, damage, knockback):
+    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, health, damage, defense, knockback):
 	MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE)
 	self.health = health
-        self.damage = damage
+    self.damage = damage
+    self.defense = defense
 	self.knockback = knockback
     def update(self, gamearea, env=None):
 	MovingAnimatingEntity.update(self, gamearea, env)
