@@ -28,6 +28,10 @@ class Entity(pygame.sprite.Sprite):
         self.rect.bottomleft=(x,y)
     def SetSpikeU(self, x, y):
         self.rect.topleft=(x,y)
+class TokenEntity(Entity):
+    def __init__(self, image, etype=ENT_TOKEN, token):
+        Entity.__init__(self, image, etype)
+        self.token = token
 class MovingEntity(Entity):
     def __init__(self, image, dx, dy, etype=ENT_OBSTACLE):
         Entity.__init__(self, image, etype)
@@ -58,22 +62,24 @@ class MovingEntity(Entity):
         self.Move()
 
 class BulletEntity(MovingAnimatingEntity):
-    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, lifetime, specialty, damage, knockback):
-        MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE)
-	self.lifetime = lifetime
-	self.specialty = specialty
-	self.damage = damage
-	self.knockback = knockback
+    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, lifetime, specialty, damage, knockback, ammo, bp):
+        MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_ENEMY_BULLET)
+    	self.lifetime = lifetime
+    	self.specialty = specialty
+    	self.damage = damage
+    	self.knockback = knockback
+        self.ammo = ammo
+        self.bp = bp
     def update(self, gamearea, env=None):
         MovingAnimatingEntity.update(self, gamearea, env)
 
 class EnemyEntity(MovingAnimatingEntity):
     def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, health, damage, defense, knockback):
-	MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE)
-	self.health = health
-    self.damage = damage
-    self.defense = defense
-	self.knockback = knockback
+    	MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_ENEMY)
+    	self.health = health
+        self.damage = damage
+        self.defense = defense
+        self.knockback = knockback
 
     def CollideEntities(self, ents):
         for ent in ents:
