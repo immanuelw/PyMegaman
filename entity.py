@@ -85,6 +85,7 @@ class EnemyEntity(MovingAnimatingEntity):
         self.char_damage = char_damage
         if cooldown <= 0:
             self.health -= char_damage
+
     def CollideEntities(self, ents):
         for ent in ents:
             coll=self.rect.clip(ExtRect.AsRect(ent.rect))
@@ -98,6 +99,7 @@ class EnemyEntity(MovingAnimatingEntity):
             elif ent.enttype==ENT_CHAR_BULLET:
                 self.EnemyHit(ent.damage)
                 self.cooldown = 90
+                ##play hit sound
             elif ent.enttype==ENT_EMPTY:
                 pass
 
