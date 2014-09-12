@@ -57,6 +57,25 @@ class MovingEntity(Entity):
             self.Collide(env.geometry)
         self.Move()
 
+class BulletEntity(MovingAnimatingEntity):
+    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, lifetime, specialty, damage, knockback):
+        MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE)
+	self.lifetime = lifetime
+	self.specialty = specialty
+	self.damage = damage
+	self.knockback = knockback
+    def update(self, gamearea, env=None):
+        MovingAnimatingEntity.update(self, gamearea, env)
+
+class EnemyEntity(MovingAnimatingEntity):
+    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, health, damage, knockback):
+	MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE)
+	self.health = health
+        self.damage = damage
+	self.knockback = knockback
+    def update(self, gamearea, env=None):
+	MovingAnimatingEntity.update(self, gamearea, env)
+
 class AnimatingEntity(Entity):
     def __init__(self, images, frametime, etype=ENT_OBSTACLE):
         Entity.__init__(self, images[0], etype)
