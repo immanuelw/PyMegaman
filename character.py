@@ -164,6 +164,7 @@ class Character(pygame.sprite.Sprite):
     def Hit(self, damage):
         if self.cooldown <= 0:
             self.health -= damage
+            #play hurt sound
         else:
             pass
     def Kill(self):
@@ -172,13 +173,16 @@ class Character(pygame.sprite.Sprite):
             self.dead=True
             self.wassad=self.sad
             self.SetSad(True)
+            ##play death sound
             pygame.mixer.Sound('data//snd//sfx//hurt.wav').play()
+            #show death animation
             self.SetColor(DEAD)
             self.SetFrameColor(self.frame2, DEADDARK)
             self.nextframe=time.time()+random.uniform(DEAD_FLICKER_MIN, DEAD_FLICKER_MAX)
             self.nextrevive=time.time()+REVIVE_TIME
     def Revive(self):
         if self.dead:
+            #show respawn animation
             self.dead=False
             self.sad=self.wassad
             self.RefreshFrames()
@@ -381,8 +385,9 @@ class Character(pygame.sprite.Sprite):
             elif ent.enttype==ENT_PORTAL:
                 self.Teleport()
             elif ent.enttype==ENT_ENEMY or ent.enttype==ENT_ENEMY_BULLET:
-                self.Hit(ent.damage)
-                self.cooldown = 90
+                if self.cooldown <= 0:
+                    self.Hit(ent.damage)
+                    self.cooldown = 90
             elif ent.enttype==ENT_EMPTY:
                 pass
     def update(self, gamearea, env=None):
