@@ -90,6 +90,16 @@ while True:
     environ = eval('env_%d_%d()' %(char.x_co,char.y_co))
     envi = Environment(environ[0], environ[1], environ[2], environ[3], environ[4])
 
+    #remove enemy entities with zero health
+    remove_ent = []
+    for entity in environ[4]:
+        if entity.enttype == ENT_ENEMY:
+            if entity.health <= 0:
+                remove_ent.append(entity)
+
+    for entity in remove_ent:
+        environ[4].RemoveEntity(entity)
+
     envi.update()
     envi.draw(gamesurf)
     pygame.transform.scale(gamesurf, (backbuf.get_width(), backbuf.get_height()), backbuf)
