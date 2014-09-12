@@ -40,6 +40,8 @@ class Character(pygame.sprite.Sprite):
         self.pulserate=1
         self.pulsecur=0
         self.pulserising=True
+        self.health=10
+        self.cooldown=0
         self.dead=False
         self.sad=False
         self.wassad=False
@@ -161,8 +163,14 @@ class Character(pygame.sprite.Sprite):
             self.rect.move_ip(self.vx, self.vy)
     def MoveDelta(self, x, y):
         self.rect.move_ip(x, y)
+    def Hit(self, damage):
+        if self.cooldown > 0:
+            self.health -= damage
+        else:
+            pass
     def Kill(self):
-        if not self.dead:
+        if self.health == 0:
+        #if not self.dead:
             self.dead=True
             self.wassad=self.sad
             self.SetSad(True)
@@ -254,23 +262,6 @@ class Character(pygame.sprite.Sprite):
         if self.rect.left>gamearea.right:
             self.x_co+=1
             self.rect.right=0
-    '''
-    def Normal(self, gamearea):#changes to new area
-        if self.flipped:#y
-            if self.rect.bottom<0:
-                #env=env[i][j-1]
-                self.rect.top=gamearea.bottom
-        else:
-            if self.rect.top>gamearea.bottom:
-                #env=env[i][j+1]
-                self.rect.bottom=0
-        if self.rect.right<0:#x
-            #env=env[i+1][j]
-            self.rect.left=gamearea.right
-        if self.rect.left>gamearea.right:
-            #env=env[i-1][j]
-            self.rect.right=0
-    '''
     def SetSprite(self):
         if self.hitfloor and self.vx:
 ##        if self.vx and not self.vy:
@@ -391,14 +382,9 @@ class Character(pygame.sprite.Sprite):
                 ent.OnCharCollide(self)
             elif ent.enttype==ENT_PORTAL:
                 self.Teleport()
-            #elif ent.enttype==ENT_INVERTER:
-                #self.Flip()
-            #elif ent.enttype==ENT_CONVEYER_A:
-                #self.Conveyer()
-            #elif ent.enttype==ENT_CONVEYER_B:
-                #self.Conveyer()
-            elif ent.enttype==ENT_BREAKAWAY:
-                self.breakaway+=1
+            elif ent.enttype==ENT_ENEMY or ent.enttype==ENT_ENEMY_BULLET:
+                self.Hit(ent.damage)
+                self.cooldown = 90
             elif ent.enttype==ENT_EMPTY:
                 pass
     def update(self, gamearea, env=None):
