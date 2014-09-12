@@ -60,6 +60,11 @@ ENT_PORTAL=6 #Changes location of character
 ENT_BREAKAWAY=10 #Graduated disappearance of block image, then removal until Revival
 ENT_EMPTY=11 #null environment variable to allow set with only one entity on a screen
 
+ENT_ENEMY=12 #Enemy entity
+ENT_ENEMY_BULLET=13 #Enemy bullet entity
+ENT_CHAR_BULLET=14 #Character bullet enetity
+
+
 DEAD_FLICKER_MIN=0.05
 DEAD_FLICKER_MAX=0.15
 
