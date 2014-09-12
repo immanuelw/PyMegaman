@@ -48,6 +48,8 @@ pygame.mixer.music.play(-1, 0.0)
 pygame.display.set_caption('VVVVVV')
 
 while True:
+    if char.cooldown > 0:
+        char.cooldown -= 1
     environ[1].rects=[]
     gamesurf.fill(BLACK)
     g.DebugRender(gamesurf)
