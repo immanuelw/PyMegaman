@@ -63,9 +63,7 @@ class Character(pygame.sprite.Sprite):
         self.checkpoint=None
         self.hitcheckpoint=False
         self.teleportpoint=None
-        self.tokens=0
-        ##self.tokens=[]
-        ##self.token_id=1#correspond to room number eventually, token_id[room#_x][room#y]=random value
+        self.tokens=[0]
         self.breakaway=0
         self.SetColor(col)
         self.enttype=ENT_CHARACTER
@@ -375,7 +373,7 @@ class Character(pygame.sprite.Sprite):
                 self.Kill()
             elif ent.enttype==ENT_TOKEN:
                 pygame.mixer.Sound('data//snd//sfx//souleyeminijingle.wav').play()
-                self.tokens+=1
+                self.tokens.append(ent.token)
             elif ent.enttype==ENT_CHECKPOINT:
                 self.SetCheckpointHere()
             elif ent.enttype==ENT_SCRIPTED:
