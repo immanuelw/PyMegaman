@@ -81,10 +81,12 @@ class EnemyEntity(MovingAnimatingEntity):
         self.defense = defense
         self.knockback = knockback
 
+    def EnemyHit(self, char_damage):
+        self.char_damage = char_damage
+        if cooldown <= 0:
+            self.health -= char_damage
     def CollideEntities(self, ents):
         for ent in ents:
-            if ent.enttype==ENT_CHARACTER:
-                continue #Never collide
             coll=self.rect.clip(ExtRect.AsRect(ent.rect))
             if not (coll.width or coll.height):
                 continue #Not colliding
@@ -93,19 +95,8 @@ class EnemyEntity(MovingAnimatingEntity):
                 #rects (and updates it in place), so we don't have to worry about collisions.
                 #See collide for more info.
                 pass
-            elif ent.enttype==ENT_OBSTACLE:
-                self.Kill()
-            elif ent.enttype==ENT_TOKEN:
-                pygame.mixer.Sound('data//snd//sfx//souleyeminijingle.wav').play()
-                self.tokens+=1
-            elif ent.enttype==ENT_CHECKPOINT:
-                self.SetCheckpointHere()
-            elif ent.enttype==ENT_SCRIPTED:
-                ent.OnCharCollide(self)
-            elif ent.enttype==ENT_PORTAL:
-                self.Teleport()
-            elif ent.enttype==ENT_ENEMY or ent.enttype==ENT_ENEMY_BULLET:
-                self.Hit(ent.damage)
+            elif ent.enttype==ENT_CHAR_BULLET:
+                self.EnemyHit(ent.damage)
                 self.cooldown = 90
             elif ent.enttype==ENT_EMPTY:
                 pass

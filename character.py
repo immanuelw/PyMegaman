@@ -164,7 +164,7 @@ class Character(pygame.sprite.Sprite):
     def MoveDelta(self, x, y):
         self.rect.move_ip(x, y)
     def Hit(self, damage):
-        if self.cooldown > 0:
+        if self.cooldown <= 0:
             self.health -= damage
         else:
             pass
