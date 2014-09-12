@@ -62,7 +62,7 @@ class MovingEntity(Entity):
         self.Move()
 
 class BulletEntity(MovingAnimatingEntity):
-    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, lifetime, specialty, damage, knockback, ammo, bp):
+    def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, lifetime, specialty, damage, knockback, ammo, bp, sound):
         MovingAnimatingEntity.__init__(self, images, frametime, dx, dy, etype=ENT_ENEMY_BULLET)
     	self.lifetime = lifetime
     	self.specialty = specialty
@@ -70,6 +70,7 @@ class BulletEntity(MovingAnimatingEntity):
     	self.knockback = knockback
         self.ammo = ammo
         self.bp = bp
+        self.sound = sound
     def update(self, gamearea, env=None):
         MovingAnimatingEntity.update(self, gamearea, env)
 
@@ -97,9 +98,10 @@ class EnemyEntity(MovingAnimatingEntity):
                 #See collide for more info.
                 pass
             elif ent.enttype==ENT_CHAR_BULLET:
-                self.EnemyHit(ent.damage)
-                self.cooldown = 90
-                ##play hit sound
+                if self.cooldown <= 0:
+                    self.EnemyHit(ent.damage)
+                    self.cooldown = 90
+                    ##play hit sound
             elif ent.enttype==ENT_EMPTY:
                 pass
 

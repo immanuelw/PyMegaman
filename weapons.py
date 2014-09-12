@@ -26,14 +26,14 @@ FireToken = TokenEntity(?, ENT_TOKEN, 5)
 ElecToken = TokenEntity(?, ENT_TOKEN, 6)
 MagnetToken = TokenEntity(?, ENT_TOKEN, 7)
 
-MegaBuster = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 1e8, 30)
-RollingCutter = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-SuperArm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-IceSlasher = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-HyperBomb = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-FireStorm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-ThunderBeam = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-MagnetBeam = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 5, 20, 30)
+MegaBuster = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 1e8, 30, sound)
+RollingCutter = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
+SuperArm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
+IceSlasher = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
+HyperBomb = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
+FireStorm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
+ThunderBeam = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
+MagnetBeam = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 5, 20, 30, sound)
 
 weapons = {0:MegaBuster, 1:RollingCutter, 2:SuperArm, 3:IceSLasher, 4:HyperBomb, 5:FireStorm, 6:ThunderBeam, 7:MagnetBeam}
 
