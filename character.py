@@ -40,6 +40,7 @@ class Character(pygame.sprite.Sprite):
         self.pulserate=1
         self.pulsecur=0
         self.pulserising=True
+        self.health_max=10
         self.health=10
         self.cooldown=0
         self.dead=False
@@ -54,7 +55,6 @@ class Character(pygame.sprite.Sprite):
         self.y_co=3
         self.checkpoint_x=0
         self.checkpoint_y=0
-        #self.conveyerspeed=3
         self.hitfloor=False #vy constrained to 0
         self.hitwall=False #vx constrained to 0
         self.goleft=False #Apply negative accel x
@@ -188,9 +188,11 @@ class Character(pygame.sprite.Sprite):
             self.RefreshFrames()
             self.x_co=self.check_x
             self.y_co=self.check_y
-            #print self.x_co, self.check_x
+            #restore health
+            self.health = self.health_max
+            #play respawn sound
+            #sound.play()
             self.RestoreCheckpoint()
-            self.breakaway=0
     def RestoreCheckpoint(self):
         if not self.checkpoint:
             return
