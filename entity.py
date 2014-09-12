@@ -74,8 +74,39 @@ class EnemyEntity(MovingAnimatingEntity):
     self.damage = damage
     self.defense = defense
 	self.knockback = knockback
+
+    def CollideEntities(self, ents):
+        for ent in ents:
+            if ent.enttype==ENT_CHARACTER:
+                continue #Never collide
+            coll=self.rect.clip(ExtRect.AsRect(ent.rect))
+            if not (coll.width or coll.height):
+                continue #Not colliding
+            if ent.enttype==ENT_PLATFORM:
+                #As a hack, this kind of entity usually inserts its own rect into the Geometry's
+                #rects (and updates it in place), so we don't have to worry about collisions.
+                #See collide for more info.
+                pass
+            elif ent.enttype==ENT_OBSTACLE:
+                self.Kill()
+            elif ent.enttype==ENT_TOKEN:
+                pygame.mixer.Sound('data//snd//sfx//souleyeminijingle.wav').play()
+                self.tokens+=1
+            elif ent.enttype==ENT_CHECKPOINT:
+                self.SetCheckpointHere()
+            elif ent.enttype==ENT_SCRIPTED:
+                ent.OnCharCollide(self)
+            elif ent.enttype==ENT_PORTAL:
+                self.Teleport()
+            elif ent.enttype==ENT_ENEMY or ent.enttype==ENT_ENEMY_BULLET:
+                self.Hit(ent.damage)
+                self.cooldown = 90
+            elif ent.enttype==ENT_EMPTY:
+                pass
+
     def update(self, gamearea, env=None):
 	    MovingAnimatingEntity.update(self, gamearea, env)
+        
 
 class AnimatingEntity(Entity):
     def __init__(self, images, frametime, etype=ENT_OBSTACLE):
