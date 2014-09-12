@@ -212,13 +212,8 @@ class Character(pygame.sprite.Sprite):
         self.vy=0
         self.SetHitFloor(False)
         self.SetHitWall(False)
-#    def Conveyer(self, hitfloor):
-#        self.hitfloor=hitfloor
-#        if hitfloor:
-#            self.vx+=self.conveyerspeed
-#            self.nextframe=time.time()+WALK_ANIM_TIME
-    #def Breakaway(self):
-        #want it to remove images in order(or place), and then finally remove rect.
+    def Shoot(self):
+        #shooting animation
     def Accelerate(self):
         if self.hitwall:
             self.vx=0
