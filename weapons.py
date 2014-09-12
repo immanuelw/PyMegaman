@@ -23,4 +23,33 @@ SuperArm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
 IceSlasher = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
 HyperBomb = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
 FireStorm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
-MagnetBeam = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30)
+MagnetBeam = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 5, 20, 30)
+
+weapons = {0:MegaBuster, 1:RollingCutter, 2:SuperArm, 3:IceSLasher, 4:HyperBomb, 5:FireStorm, 6:MagnetBeam}
+###EXAMPLE
+#Already have 0, and 2
+#mega_weapon = [0,2]
+#collect token with value 6
+#Add 6 to mega_weapon list
+#mega_weapon.append(token=6)
+
+#check for usable weapons
+#mega_shot = [] #empty list of weapons
+#for weapon in mega_weapon:
+#   mega_shot.append(weapons[weapon]) #list of all weapons
+#
+
+#cycle through list for used weapon
+
+#mega_number = 0 #start with mega buster before game loop
+##if BUTTON_PRESS == K_r: #simulate pressing button
+#   mega_number += 1
+#   mega = mega_shot[mega_number % len(mega)]#mega denotes a particular weapon object
+
+##if BUTTON_PRESS == K_l: #simulate pressing button
+#   mega_number -= 1
+#   mega = [mega_number % len(mega)] #mega denotes a particular weapon object
+
+
+#to use any weapon
+#char.Shoot(mega) #function which takes in weapon and outputs bullet with properties
