@@ -394,7 +394,6 @@ class Character(pygame.sprite.Sprite):
             self.Accelerate()
             self.Move()
             self.Normalize(gamearea)
-            #self.Normal(gamearea)
             self.Pulsate()
             self.SetSprite()
         if env:
