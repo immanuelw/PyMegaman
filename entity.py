@@ -75,7 +75,7 @@ class EnemyEntity(MovingAnimatingEntity):
     self.defense = defense
 	self.knockback = knockback
     def update(self, gamearea, env=None):
-	MovingAnimatingEntity.update(self, gamearea, env)
+	    MovingAnimatingEntity.update(self, gamearea, env)
 
 class AnimatingEntity(Entity):
     def __init__(self, images, frametime, etype=ENT_OBSTACLE):
