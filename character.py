@@ -197,8 +197,8 @@ class Character(pygame.sprite.Sprite):
             #show death animation
             self.SetColor(DEAD)
             self.SetFrameColor(self.frame2, DEADDARK)
-            self.nextframe = time.time()+random.uniform(DEAD_FLICKER_MIN, DEAD_FLICKER_MAX)
-            self.nextrevive = time.time()+REVIVE_TIME
+            self.nextframe = time.time() + random.uniform(DEAD_FLICKER_MIN, DEAD_FLICKER_MAX)
+            self.nextrevive = time.time() + REVIVE_TIME
     def Revive(self):
         if self.dead:
             #show respawn animation
