@@ -64,6 +64,10 @@ ENT_ENEMY=12 #Enemy entity
 ENT_ENEMY_BULLET=13 #Enemy bullet entity
 ENT_CHAR_BULLET=14 #Character bullet enetity
 
+#The .token attribute on any token entity in entities list
+TOKEN_HEALTH = 9 
+TOKEN_AMMO = 10
+
 
 DEAD_FLICKER_MIN=0.05
 DEAD_FLICKER_MAX=0.15
