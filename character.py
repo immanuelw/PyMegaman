@@ -19,16 +19,30 @@ from geom import Geometry
 
 g=Geometry()
 
-IMG_CHAR=pygame.image.load('data//img//char.png')
-IMG_CHAR_SAD=pygame.image.load('data//img//char_sad.png')
-IMG_CHAR_WALKING=pygame.image.load('data//img//char_walking.png')
-IMG_CHAR_WALKING_SAD=pygame.image.load('data//img//char_walking_sad.png')
+IMG_CHAR = pygame.image.load('data//img//char.png')
+IMG_CHAR_SAD = pygame.image.load('data//img//char_sad.png')
+IMG_CHAR_WALKING_1 = pygame.image.load('data//img//char_walking_1.png')
+IMG_CHAR_WALKING_2 = pygame.image.load('data//img//char_walking_2.png')
+IMG_CHAR_WALKING_3 = pygame.image.load('data//img//char_walking_3.png')
+IMG_CHAR_WALKING_4 = pygame.image.load('data//img//char_walking_4.png')
+IMG_CHAR_WALKING_5 = pygame.image.load('data//img//char_walking_5.png')
+IMG_CHAR_WALKING_6 = pygame.image.load('data//img//char_walking_6.png')
+IMG_CHAR_WALKING_7 = pygame.image.load('data//img//char_walking_7.png')
+IMG_CHAR_WALKING_8 = pygame.image.load('data//img//char_walking_8.png')
+IMG_CHAR_WALKING_SAD = pygame.image.load('data//img//char_walking_sad.png')
 
 class Character(pygame.sprite.Sprite):
     def __init__(self, col):
         pygame.sprite.Sprite.__init__(self)
-        self.frame1=IMG_CHAR.copy()
-        self.frame2=IMG_CHAR_WALKING.copy()
+        self.frame0=IMG_CHAR.copy()
+        self.frame1=IMG_CHAR_WALKING_1.copy()
+        self.frame2=IMG_CHAR_WALKING_2.copy()
+        self.frame3=IMG_CHAR_WALKING_3.copy()
+        self.frame4=IMG_CHAR_WALKING_4.copy()
+        self.frame5=IMG_CHAR_WALKING_5.copy()
+        self.frame6=IMG_CHAR_WALKING_6.copy()
+        self.frame7=IMG_CHAR_WALKING_7.copy()
+        self.frame8=IMG_CHAR_WALKING_8.copy()
         self.nextframe=0
         self.image=self.frame1
         self.rect=pygame.Rect(0, 0, self.image.get_width(), self.image.get_height())
