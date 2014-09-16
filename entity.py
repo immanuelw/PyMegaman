@@ -40,6 +40,37 @@ class AmmoTokenEntity(TokenEntity):
      def __init__(self,image, etype=ENT_TOKEN, token=TOKEN_AMMO, health):
         TokenEntity.__init__(self, image, etype=ENT_TOKEN, token=TOKEN_AMMO)
         self.ammo = ammo
+
+class PlatformEntity(Entity):
+    def __init__(self, image, dx, dy, etype=ENT_PLATFORM, friction):
+        Entity.__init__(self, image, etype)
+        self.dx=dx
+        self.dy=dy
+        self.vx=dx
+        self.vy=dy
+        self.friction = friction
+    def CollideArea(self, area):
+        if self.rect.left<area.left or self.rect.right>area.right:
+            self.vx=-self.vx
+        if self.rect.top<area.top or self.rect.bottom>area.bottom:
+            self.vy=-self.vy
+    def Collide(self, geom):
+        res=geom.TestRect(self.rect)
+        for key, val in res.iteritems():
+            depth, rect=val
+            if depth!=0 and getattr(rect, 'ent', None)!=self:
+                if key in (HITLEFT, HITRIGHT):
+                    self.vx=-self.vx
+                if key in (HITTOP, HITBOTTOM):
+                    self.vy=-self.vy
+    def Move(self):
+        self.rect.move_ip(self.vx, self.vy)
+    def update(self, gamearea, env=None):
+        self.CollideArea(gamearea)
+        if env:
+            self.Collide(env.geometry)
+        self.Move()
+
 class MovingEntity(Entity):
     def __init__(self, image, dx, dy, etype=ENT_OBSTACLE):
         Entity.__init__(self, image, etype)
