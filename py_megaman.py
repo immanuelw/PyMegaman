@@ -46,7 +46,7 @@ else:
 pygame.mixer.music.play(-1, 0.0)
 
 #title of game
-pygame.display.set_caption('VVVVVV')
+pygame.display.set_caption('Py Mega Man 1')
 
 while True:
     if char.cooldown > 0:
@@ -88,23 +88,25 @@ while True:
 ##    char.SetHitFloor(False)
 ##    print char.vx, char.vy
     for ev in pygame.event.get():
-        if ev.type==QUIT:
+        if ev.type == QUIT:
             #print eval('env_%d_%d()' %(char.x_co,char.y_co))[1]
             pygame.mixer.music.stop()
             pygame.quit()
             sys.exit()
-        elif ev.type==KEYDOWN:
-            if ev.key==K_LEFT:
+        elif ev.type == START: 
+            #change to start menu loop?
+        elif ev.type == KEYDOWN:
+            if ev.key == K_LEFT:
                 char.SetLeft()
                 char.SetGoLeft(True)
                 char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
 ##                char.SetHitFloor(False)
-            elif ev.key==K_RIGHT:
+            elif ev.key == K_RIGHT:
                 char.SetRight()
                 char.SetGoRight(True)
                 char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
 ##                char.SetHitFloor(False)
-            elif ev.key in (K_UP, K_DOWN, K_SPACE) and char.hitfloor:
+            elif ev.key in (K_UP, K_SPACE) and char.hitfloor:
                 #jumping
                 #if not char.hitfloor:
                 #   char.jump_count += 1
@@ -117,18 +119,18 @@ while True:
 ##                char.SetHitFloor(not char.hitfloor)
 ##            elif ev.key==K_w:
 ##                char.SetHitWall(not char.hitwall)
-            elif ev.key==K_s:
+            elif ev.key == K_s:
                 char.SetSad(True)
-            elif ev.key==K_h:
+            elif ev.key == K_h:
                 char.SetSad(False)
-            elif ev.key==K_k:
+            elif ev.key == K_k:
                 char.Kill()
-            elif ev.key==K_r:
+            elif ev.key == K_r:
                 char.Revive()
-        elif ev.type==KEYUP:
-            if ev.key==K_LEFT:
+        elif ev.type == KEYUP:
+            if ev.key == K_LEFT:
                 char.SetGoLeft(False)
-            elif ev.key==K_RIGHT:
+            elif ev.key == K_RIGHT:
                 char.SetGoRight(False)
 
     clk.tick(FRAMERATE)
