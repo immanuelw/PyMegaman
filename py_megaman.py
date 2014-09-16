@@ -9,9 +9,10 @@ from character import Character
 from geom import Geometry
 from bg import Background
 from env import Environment
-from entity import Entity, MovingEntity, AnimatingEntity, MovingAnimatingEntity
+from entity import *
 from config import *
 from levels import *
+from weapons import *
 
 pygame.init()
 clk=pygame.time.Clock()
@@ -78,6 +79,7 @@ while True:
 
     envi.update()
     envi.draw(gamesurf)
+    #draw specific parts of screen i.e. THE CAMERA
     pygame.transform.scale(gamesurf, (backbuf.get_width(), backbuf.get_height()), backbuf)
     window.blit(backbuf, (0, 0))
     pygame.display.update()
@@ -85,64 +87,48 @@ while True:
 ##    char.SetHitWall(False)
 ##    char.SetHitFloor(False)
 ##    print char.vx, char.vy
-    if stopper < 1:
-        for ev in pygame.event.get():
-            if ev.type==QUIT:
-                #print eval('env_%d_%d()' %(char.x_co,char.y_co))[1]
-                pygame.mixer.music.stop()
-                pygame.quit()
-                sys.exit()
-            elif ev.type==KEYDOWN:
-                if ev.key==K_LEFT:
-                    char.SetLeft()
-                    char.SetGoLeft(True)
-                    char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
+    for ev in pygame.event.get():
+        if ev.type==QUIT:
+            #print eval('env_%d_%d()' %(char.x_co,char.y_co))[1]
+            pygame.mixer.music.stop()
+            pygame.quit()
+            sys.exit()
+        elif ev.type==KEYDOWN:
+            if ev.key==K_LEFT:
+                char.SetLeft()
+                char.SetGoLeft(True)
+                char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
 ##                char.SetHitFloor(False)
-                elif ev.key==K_RIGHT:
-                    char.SetRight()
-                    char.SetGoRight(True)
-                    char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
+            elif ev.key==K_RIGHT:
+                char.SetRight()
+                char.SetGoRight(True)
+                char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
 ##                char.SetHitFloor(False)
-                elif ev.key in (K_UP, K_DOWN, K_SPACE) and char.hitfloor:
-                    #jumping
-                    #if not char.hitfloor:
-                    #   char.jump_count += 1
-                    #if char.hitfloor:
-                    #   char.jump_count = 0
-                    char.Flip()
+            elif ev.key in (K_UP, K_DOWN, K_SPACE) and char.hitfloor:
+                #jumping
+                #if not char.hitfloor:
+                #   char.jump_count += 1
+                #if char.hitfloor:
+                #   char.jump_count = 0
+                char.Flip()
 ##                char.SetHitWall(False)
-                    char.SetHitFloor(False) #Allow logic to figure out whether or not a floor is hit
+                char.SetHitFloor(False) #Allow logic to figure out whether or not a floor is hit
 ##            elif ev.key==K_f:
 ##                char.SetHitFloor(not char.hitfloor)
 ##            elif ev.key==K_w:
 ##                char.SetHitWall(not char.hitwall)
-                elif ev.key==K_s:
-                    char.SetSad(True)
-                elif ev.key==K_h:
-                    char.SetSad(False)
-                elif ev.key==K_k:
-                    char.Kill()
-                elif ev.key==K_r:
-                    char.Revive()
-            elif ev.type==KEYUP:
-                if ev.key==K_LEFT:
-                    char.SetGoLeft(False)
-                elif ev.key==K_RIGHT:
-                    char.SetGoRight(False)
-    elif stopper==1:
-        char.SetGoRight(True)
-        char.SetHitWall(False)
-        pygame.mixer.music.load('data//snd//bgm//05 - Path Complete.mp3')
-        pygame.mixer.music.play(0, 0.0)
-    elif stopper==40:
-        char.SetGoRight(False)
-    else:
-        for ev in pygame.event.get():
-            if ev.type==QUIT:
-                pygame.quit()
-                sys.exit()
-        endgame+=1
-        if endgame >= 360:
-            pygame.quit()
-            sys.exit()
+            elif ev.key==K_s:
+                char.SetSad(True)
+            elif ev.key==K_h:
+                char.SetSad(False)
+            elif ev.key==K_k:
+                char.Kill()
+            elif ev.key==K_r:
+                char.Revive()
+        elif ev.type==KEYUP:
+            if ev.key==K_LEFT:
+                char.SetGoLeft(False)
+            elif ev.key==K_RIGHT:
+                char.SetGoRight(False)
+
     clk.tick(FRAMERATE)
