@@ -30,6 +30,12 @@ XTERM=6 #pix/tick
 YGRAV=2 #pix/tick2
 YTERM=9 #pix/tick
 
+#Platformer physics constants; CHANGEABLE
+FIRST_JUMP = 1
+SECOND_JUMP = 0.7
+THIRD_JUMP = 0.6
+FOURTH_JUMP = 0.5
+
 FRAMERATE=45 #==ticks/sec, ideally
 
 WALK_ANIM_TIME=0.15 #sec before walking frame switch
