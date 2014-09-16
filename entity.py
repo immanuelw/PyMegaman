@@ -17,17 +17,17 @@ from config import *
 class Entity(pygame.sprite.Sprite):
     #A basic entity inherits all sprite properties.
     def __init__(self, image, etype):
-        self.image=image
-        self.rect=ExtRect.Wrap(image.get_rect())
-        self.enttype=etype
+        self.image = image
+        self.rect = ExtRect.Wrap(image.get_rect())
+        self.enttype = etype
     def draw(self, surf):
         surf.blit(self.image, self.rect.topleft)
     def SetPos(self, x, y):
-        self.rect.center=(x, y)
+        self.rect.center = (x, y)
     def SetSpike(self, x, y):
-        self.rect.bottomleft=(x,y)
+        self.rect.bottomleft = (x,y)
     def SetSpikeU(self, x, y):
-        self.rect.topleft=(x,y)
+        self.rect.topleft = (x,y)
 class TokenEntity(Entity):
     def __init__(self, image, etype=ENT_TOKEN, token):
         Entity.__init__(self, image, etype)
@@ -44,25 +44,25 @@ class AmmoTokenEntity(TokenEntity):
 class PlatformEntity(Entity):
     def __init__(self, image, dx, dy, etype=ENT_PLATFORM, friction):
         Entity.__init__(self, image, etype)
-        self.dx=dx
-        self.dy=dy
-        self.vx=dx
-        self.vy=dy
+        self.dx = dx
+        self.dy = dy
+        self.vx = dx
+        self.vy = dy
         self.friction = friction
     def CollideArea(self, area):
-        if self.rect.left<area.left or self.rect.right>area.right:
-            self.vx=-self.vx
-        if self.rect.top<area.top or self.rect.bottom>area.bottom:
-            self.vy=-self.vy
+        if self.rect.left < area.left or self.rect.right > area.right:
+            self.vx = -self.vx
+        if self.rect.top < area.top or self.rect.bottom > area.bottom:
+            self.vy = -self.vy
     def Collide(self, geom):
         res=geom.TestRect(self.rect)
         for key, val in res.iteritems():
-            depth, rect=val
-            if depth!=0 and getattr(rect, 'ent', None)!=self:
+            depth, rect = val
+            if depth != 0 and getattr(rect, 'ent', None) != self:
                 if key in (HITLEFT, HITRIGHT):
-                    self.vx=-self.vx
+                    self.vx = -self.vx
                 if key in (HITTOP, HITBOTTOM):
-                    self.vy=-self.vy
+                    self.vy = -self.vy
     def Move(self):
         self.rect.move_ip(self.vx, self.vy)
     def update(self, gamearea, env=None):
@@ -74,24 +74,24 @@ class PlatformEntity(Entity):
 class MovingEntity(Entity):
     def __init__(self, image, dx, dy, etype=ENT_OBSTACLE):
         Entity.__init__(self, image, etype)
-        self.dx=dx
-        self.dy=dy
-        self.vx=dx
-        self.vy=dy
+        self.dx = dx
+        self.dy = dy
+        self.vx = dx
+        self.vy = dy
     def CollideArea(self, area):
-        if self.rect.left<area.left or self.rect.right>area.right:
-            self.vx=-self.vx
-        if self.rect.top<area.top or self.rect.bottom>area.bottom:
-            self.vy=-self.vy
+        if self.rect.left < area.left or self.rect.right > area.right:
+            self.vx = -self.vx
+        if self.rect.top < area.top or self.rect.bottom > area.bottom:
+            self.vy = -self.vy
     def Collide(self, geom):
-        res=geom.TestRect(self.rect)
+        res = geom.TestRect(self.rect)
         for key, val in res.iteritems():
-            depth, rect=val
-            if depth!=0 and getattr(rect, 'ent', None)!=self:
+            depth, rect = val
+            if depth != 0 and getattr(rect, 'ent', None) != self:
                 if key in (HITLEFT, HITRIGHT):
-                    self.vx=-self.vx
+                    self.vx = -self.vx
                 if key in (HITTOP, HITBOTTOM):
-                    self.vy=-self.vy
+                    self.vy = -self.vy
     def Move(self, ai_type):
         self.rect.move_ip(self.vx, self.vy)
         #add in multiple ai movement types
@@ -134,20 +134,20 @@ class EnemyEntity(MovingAnimatingEntity):
 
     def CollideEntities(self, ents):
         for ent in ents:
-            coll=self.rect.clip(ExtRect.AsRect(ent.rect))
+            coll = self.rect.clip(ExtRect.AsRect(ent.rect))
             if not (coll.width or coll.height):
                 continue #Not colliding
-            if ent.enttype==ENT_PLATFORM:
+            if ent.enttype == ENT_PLATFORM:
                 #As a hack, this kind of entity usually inserts its own rect into the Geometry's
                 #rects (and updates it in place), so we don't have to worry about collisions.
                 #See collide for more info.
                 pass
-            elif ent.enttype==ENT_CHAR_BULLET:
+            elif ent.enttype == ENT_CHAR_BULLET:
                 if self.cooldown <= 0:
                     self.EnemyHit(ent.damage)
                     self.cooldown = 90
                     ##play hit sound
-            elif ent.enttype==ENT_EMPTY:
+            elif ent.enttype == ENT_EMPTY:
                 pass
 
     def update(self, gamearea, env=None):
@@ -158,17 +158,17 @@ class EnemyEntity(MovingAnimatingEntity):
 class AnimatingEntity(Entity):
     def __init__(self, images, frametime, etype=ENT_OBSTACLE):
         Entity.__init__(self, images[0], etype)
-        self.images=images
-        self.idx=0
-        self.frametime=frametime
-        self.nextframe=time.time()+self.frametime
+        self.images = images
+        self.idx = 0
+        self.frametime = frametime
+        self.nextframe = time.time() + self.frametime
     def Animate(self):
-        if time.time()>self.nextframe:
-            self.idx+=1
-            if self.idx>=len(self.images):
-                self.idx=0 #loops character
-            self.image=self.images[idx]
-            self.nextframe=self.frametime+time.time()
+        if time.time() > self.nextframe:
+            self.idx += 1
+            if self.idx >= len(self.images):
+                self.idx = 0 #loops character
+            self.image = self.images[idx]
+            self.nextframe = self.frametime + time.time()
     def update(self, gamearea, env=None):
         self.Animate()
 
