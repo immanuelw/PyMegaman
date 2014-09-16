@@ -92,8 +92,14 @@ class MovingEntity(Entity):
                     self.vx=-self.vx
                 if key in (HITTOP, HITBOTTOM):
                     self.vy=-self.vy
-    def Move(self):
+    def Move(self, ai_type):
         self.rect.move_ip(self.vx, self.vy)
+        #add in multiple ai movement types
+        #if ai_type == AI_METTAUR:
+        #   #DO METTAUR STUFF
+        #elif ai_type == AI_FIREMAN:
+        #   #DO FIREMAN STUFF
+        #MAYBE PULL IN AI FUNCTIONS FROM OUTSIDE THIS FILE
     def update(self, gamearea, env=None):
         self.CollideArea(gamearea)
         if env:
