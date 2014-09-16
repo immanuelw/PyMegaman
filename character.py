@@ -60,7 +60,8 @@ class Character(pygame.sprite.Sprite):
         self.goleft=False #Apply negative accel x
         self.goright=False #Apply positive accel x
         self.standingon=None #An entity whose vx,vy is added to ours
-        self.friction = 1
+        self.friction = 1 #friction coefficient for surfaces
+        self.jump_count = 0 #counter to change jumping physics
         self.checkpoint=None
         self.hitcheckpoint=False
         self.teleportpoint=None
