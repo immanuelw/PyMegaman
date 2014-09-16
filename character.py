@@ -60,6 +60,7 @@ class Character(pygame.sprite.Sprite):
         self.goleft=False #Apply negative accel x
         self.goright=False #Apply positive accel x
         self.standingon=None #An entity whose vx,vy is added to ours
+        self.friction = 1
         self.checkpoint=None
         self.hitcheckpoint=False
         self.teleportpoint=None
@@ -231,12 +232,13 @@ class Character(pygame.sprite.Sprite):
         if self.hitwall:
             self.vx=0
         else:
-            ax=((1 if self.goright else 0)-(1 if self.goleft else 0))*XACCEL
+            #horizantal acceleration, include friction
+            ax=((1 if self.goright else 0)-(1 if self.goleft else 0))*XACCEL*self.friction
             if ax==0: #We want to stop moving...
                 if self.vx>0:
-                    ax=-XDECEL
+                    ax=-XDECEL*self.friction
                 elif self.vx<0:
-                    ax=XDECEL
+                    ax=XDECEL*self.friction
             self.vx+=ax
             #Clip to terminal velocity
             if self.vx>XTERM:
@@ -372,6 +374,7 @@ class Character(pygame.sprite.Sprite):
             if not (coll.width or coll.height):
                 continue #Not colliding
             if ent.enttype==ENT_PLATFORM:
+                char.friction = ent.friction
                 #As a hack, this kind of entity usually inserts its own rect into the Geometry's
                 #rects (and updates it in place), so we don't have to worry about collisions.
                 #See collide for more info.
