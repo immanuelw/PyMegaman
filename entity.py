@@ -32,6 +32,14 @@ class TokenEntity(Entity):
     def __init__(self, image, etype=ENT_TOKEN, token):
         Entity.__init__(self, image, etype)
         self.token = token
+class HealthTokenEntity(TokenEntity):
+    def __init__(self,image, etype=ENT_TOKEN, token=TOKEN_HEALTH, health):
+        TokenEntity.__init__(self, image, etype=ENT_TOKEN, token=TOKEN_HEALTH)
+        self.health = health
+class AmmoTokenEntity(TokenEntity):
+     def __init__(self,image, etype=ENT_TOKEN, token=TOKEN_AMMO, health):
+        TokenEntity.__init__(self, image, etype=ENT_TOKEN, token=TOKEN_AMMO)
+        self.ammo = ammo
 class MovingEntity(Entity):
     def __init__(self, image, dx, dy, etype=ENT_OBSTACLE):
         Entity.__init__(self, image, etype)
