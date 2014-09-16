@@ -15,26 +15,26 @@ from levels import *
 from weapons import *
 
 pygame.init()
-clk=pygame.time.Clock()
+clk = pygame.time.Clock()
 
-window=pygame.display.set_mode((GAMERECT.width*2, GAMERECT.height*2))
-gamesurf=pygame.Surface((GAMERECT.width, GAMERECT.height))
-backbuf=pygame.Surface((window.get_width(), window.get_height()))
+window = pygame.display.set_mode((GAMERECT.width*2, GAMERECT.height*2))
+gamesurf = pygame.Surface((GAMERECT.width, GAMERECT.height))
+backbuf = pygame.Surface((window.get_width(), window.get_height()))
 
 #char.SetCheckpoint(160,187)
 char.SetSpike(50,188)
 #char.SetSpike(90,50)
 g=Geometry()
-char.x_co=1
-char.y_co=3
+char.x_co = 1
+char.y_co = 3
 
 #location of last room
-last_x=6
-last_y=1
+last_x = 6
+last_y = 1
 
-stopper=0
-cooldown=0
-endgame=0
+stopper = 0
+cooldown = 0
+endgame = 0
 
 environ = eval('env_%d_%d()' %(char.x_co,char.y_co))
 envi = Environment(environ[0], environ[1], environ[2], environ[3], environ[4])
