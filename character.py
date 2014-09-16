@@ -303,10 +303,22 @@ class Character(pygame.sprite.Sprite):
                 self.nextframe=time.time()+WALK_ANIM_TIME
                 if self.image==self.frame1:
                     self.image=self.frame2
+                elif self.image==self.frame2:
+                    self.image=self.frame3
+                elif self.image==self.frame3:
+                    self.image=self.frame4
+                elif self.image==self.frame4:
+                    self.image=self.frame5
+                elif self.image==self.frame5:
+                    self.image=self.frame6
+                elif self.image==self.frame6:
+                    self.image=self.frame7
+                elif self.image==self.frame7:
+                    self.image=self.frame8
                 else:
                     self.image=self.frame1
         else:
-            self.image=self.frame1
+            self.image=self.frame0
     def Pulsate(self):
         if self.pulsation==0:
             return
