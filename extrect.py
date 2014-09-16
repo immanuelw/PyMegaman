@@ -11,7 +11,7 @@ import pygame
 
 class ExtRect(object):
     def __init__(self, *args, **kwargs):
-        self._rect=pygame.Rect(*args, **kwargs)
+        self._rect = pygame.Rect(*args, **kwargs)
     @classmethod
     def Wrap(cls, obj):
         if isinstance(obj, ExtRect):

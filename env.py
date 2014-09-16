@@ -17,30 +17,30 @@ from config import *
 
 class Environment(object):
     def __init__(self, area, geometry, image, background, entities):
-        self.area=area
-        self.geometry=geometry
-        self.image=image
-        self.background=background
-        self.entities=set(entities)
-        self.characters=set()
+        self.area = area
+        self.geometry = geometry
+        self.image = image
+        self.background = background
+        self.entities = set(entities)
+        self.characters = set()
         for ent in self.entities:
             #Call it a hack...
-            if ent.enttype==ENT_PLATFORM:
+            if ent.enttype == ENT_PLATFORM:
                 geometry.AddRect(ent.rect)
-                ent.rect.ent=ent
-            if ent.enttype==ENT_CHARACTER:
+                ent.rect.ent = ent
+            if ent.enttype == ENT_CHARACTER:
                 self.characters.add(ent)
-        self.dodebugdraw=False
+        self.dodebugdraw = False
     def draw(self, surf):
         self.background.draw(surf)
         surf.blit(self.image, (0, 0))
         for ent in self.entities:
             ent.draw(surf)
     def AddEntity(self, ent):
-        if ent.enttype==ENT_PLATFORM:
+        if ent.enttype == ENT_PLATFORM:
             self.geometry.AddRect(ent.rect)
-            ent.rect.ent=ent
-        if ent.enttype==ENT_CHARACTER:
+            ent.rect.ent = ent
+        if ent.enttype == ENT_CHARACTER:
             self.characters.add(ent)
         self.entities.add(ent)
     def RemoveEntity(self, ent):
