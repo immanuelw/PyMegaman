@@ -125,8 +125,14 @@ while True:
                 char.SetSad(False)
             elif ev.key == K_k:
                 char.Kill()
+            #Cycle through weapons
+            elif ev.key == K_l:
+                char.token = (char.token - 1) % len(weapons)
             elif ev.key == K_r:
-                char.Revive()
+                char.token = (char.token - 1) % len(weapons)
+            #Shoot button
+            elif ev.key == K_z:
+                char.Shoot(char.weapons[char.token])
         elif ev.type == KEYUP:
             if ev.key == K_LEFT:
                 char.SetGoLeft(False)
