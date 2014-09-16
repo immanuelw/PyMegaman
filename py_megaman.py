@@ -104,6 +104,11 @@ while True:
                     char.SetHitWall(False) #Allow logic to figure out whether or not a wall is hit
 ##                char.SetHitFloor(False)
                 elif ev.key in (K_UP, K_DOWN, K_SPACE) and char.hitfloor:
+                    #jumping
+                    #if not char.hitfloor:
+                    #   char.jump_count += 1
+                    #if char.hitfloor:
+                    #   char.jump_count = 0
                     char.Flip()
 ##                char.SetHitWall(False)
                     char.SetHitFloor(False) #Allow logic to figure out whether or not a floor is hit
