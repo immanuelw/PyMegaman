@@ -226,6 +226,7 @@ class Character(pygame.sprite.Sprite):
         self.SetHitWall(False)
     def Shoot(self):
         #shooting animation
+    #character physics
     def Accelerate(self):
         if self.hitwall:
             self.vx=0
