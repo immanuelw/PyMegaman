@@ -62,6 +62,7 @@ class Character(pygame.sprite.Sprite):
         self.standingon=None #An entity whose vx,vy is added to ours
         self.friction = 1 #friction coefficient for surfaces
         self.jump_count = 0 #counter to change jumping physics
+        self.knockback = 0 #value to add to velocity for knockback arc
         self.checkpoint=None
         self.hitcheckpoint=False
         self.teleportpoint=None
@@ -237,10 +238,11 @@ class Character(pygame.sprite.Sprite):
             ax=((1 if self.goright else 0)-(1 if self.goleft else 0))*XACCEL*self.friction
             if ax==0: #We want to stop moving...
                 if self.vx>0:
-                    ax=-XDECEL*self.friction
+                    ax = -XDECEL*self.friction
                 elif self.vx<0:
-                    ax=XDECEL*self.friction
-            self.vx+=ax
+                    ax = XDECEL*self.friction
+                    self.knockback = -self.knockback
+            self.vx += ax + self.knockback
             #Clip to terminal velocity
             if self.vx>XTERM:
                 self.vx=XTERM
@@ -402,6 +404,7 @@ class Character(pygame.sprite.Sprite):
             elif ent.enttype==ENT_ENEMY or ent.enttype==ENT_ENEMY_BULLET:
                 if self.cooldown <= 0:
                     self.Hit(ent.damage)
+                    self.knockback = ent.knockback
                     self.cooldown = 90
             elif ent.enttype==ENT_EMPTY:
                 pass
