@@ -250,7 +250,15 @@ class Character(pygame.sprite.Sprite):
         if self.hitfloor:
             self.vy=0
         else:
-            self.vy+=YGRAV*(-1 if self.flipped else 1)
+            #EXPERIMENTAL PLATFORMER PHYSICS
+            if (char.jump_count >= 0 and char.jump_count <= 10) or (char.jump_count > 120 and char.jump_count <= 130):
+                self.vy+=YGRAV*(-1 if self.flipped else 1)*FIRST_JUMP
+            elif (char.jump_count > 10 and char.jump_count <= 30) or (char.jump_count > 100 and char.jump_count <= 120):
+                self.vy+=YGRAV*(-1 if self.flipped else 1)*SECOND_JUMP
+            elif (char.jump_count > 30 and char.jump_count <= 60) or (char.jump_count > 70 and char.jump_count <= 100):
+                self.vy+=YGRAV*(-1 if self.flipped else 1)*THIRD_JUMP
+            elif char.jump_count > 60 and char.jump_count <= 70:
+                self.vy+=YGRAV*(-1 if self.flipped else 1)*FOURTH_JUMP
             if self.vy>YTERM:
                 self.vy=YTERM
             elif self.vy<-YTERM:
