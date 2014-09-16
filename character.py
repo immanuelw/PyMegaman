@@ -17,6 +17,8 @@ from config import *
 
 from geom import Geometry
 
+from weapons import *
+
 g=Geometry()
 
 IMG_CHAR = pygame.image.load('data//img//char.png')
@@ -34,54 +36,54 @@ IMG_CHAR_WALKING_SAD = pygame.image.load('data//img//char_walking_sad.png')
 class Character(pygame.sprite.Sprite):
     def __init__(self, col):
         pygame.sprite.Sprite.__init__(self)
-        self.frame0=IMG_CHAR.copy()
-        self.frame1=IMG_CHAR_WALKING_1.copy()
-        self.frame2=IMG_CHAR_WALKING_2.copy()
-        self.frame3=IMG_CHAR_WALKING_3.copy()
-        self.frame4=IMG_CHAR_WALKING_4.copy()
-        self.frame5=IMG_CHAR_WALKING_5.copy()
-        self.frame6=IMG_CHAR_WALKING_6.copy()
-        self.frame7=IMG_CHAR_WALKING_7.copy()
-        self.frame8=IMG_CHAR_WALKING_8.copy()
-        self.nextframe=0
-        self.image=self.frame1
-        self.rect=pygame.Rect(0, 0, self.image.get_width(), self.image.get_height())
-        self.left=False #Heading left?
-        self.flipped=False #Inverted?
-        self.oldcol=WHITE
-        self.basecol=col
-        self.pulsation=0
-        self.pulserate=1
-        self.pulsecur=0
+        self.frame0 = IMG_CHAR.copy()
+        self.frame1 = IMG_CHAR_WALKING_1.copy()
+        self.frame2 = IMG_CHAR_WALKING_2.copy()
+        self.frame3 = IMG_CHAR_WALKING_3.copy()
+        self.frame4 = IMG_CHAR_WALKING_4.copy()
+        self.frame5 = IMG_CHAR_WALKING_5.copy()
+        self.frame6 = IMG_CHAR_WALKING_6.copy()
+        self.frame7 = IMG_CHAR_WALKING_7.copy()
+        self.frame8 = IMG_CHAR_WALKING_8.copy()
+        self.nextframe = 0
+        self.image = self.frame1
+        self.rect = pygame.Rect(0, 0, self.image.get_width(), self.image.get_height())
+        self.left = False #Heading left?
+        self.flipped = False #Inverted?
+        self.oldcol = WHITE
+        self.basecol = col
+        self.pulsation = 0
+        self.pulserate = 1
+        self.pulsecur = 0
         self.pulserising=True
-        self.health_max=10
-        self.health=10
-        self.cooldown=0
-        self.dead=False
-        self.sad=False
-        self.wassad=False
-        self.nextrevive=0
-        self.vx=0
-        self.vy=0
-        self.check_x=1
-        self.check_y=3
-        self.x_co=1
-        self.y_co=3
-        self.checkpoint_x=0
-        self.checkpoint_y=0
-        self.hitfloor=False #vy constrained to 0
-        self.hitwall=False #vx constrained to 0
-        self.goleft=False #Apply negative accel x
-        self.goright=False #Apply positive accel x
-        self.standingon=None #An entity whose vx,vy is added to ours
+        self.health_max = 10 #Sets maximum health of character for respawn
+        self.health = 10 #Sets initial health of character
+        self.cooldown = 0 #sets timer
+        self.dead = False #boolean value to check for death
+        self.sad = False
+        self.wassad = False
+        self.nextrevive = 0
+        self.vx = 0 #value of x-velocity
+        self.vy = 0 #value of y-velocity
+        self.check_x = 1
+        self.check_y = 3
+        self.x_co = 1
+        self.y_co = 3
+        self.checkpoint_x = 0
+        self.checkpoint_y = 0
+        self.hitfloor = False #vy constrained to 0
+        self.hitwall = False #vx constrained to 0
+        self.goleft = False #Apply negative accel x
+        self.goright = False #Apply positive accel x
+        self.standingon = None #An entity whose vx,vy is added to ours
         self.friction = 1 #friction coefficient for surfaces
         self.jump_count = 0 #counter to change jumping physics
         self.knockback = 0 #value to add to velocity for knockback arc
         self.checkpoint=None
         self.hitcheckpoint=False
         self.teleportpoint=None
-        self.tokens=[0]
-        self.breakaway=0
+        self.tokens = [0]
+        self.breakaway = 0
         self.SetColor(col)
         self.enttype=ENT_CHARACTER
     def draw(self, surf):
