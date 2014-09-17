@@ -177,7 +177,7 @@ class Character(pygame.sprite.Sprite):
             self.vy = vy
     def Move(self):
         if self.standingon:
-            self.rect.move_ip(self.standingon.vx+self.vx, self.standingon.vy+self.vy)
+            self.rect.move_ip(self.standingon.vx + self.vx, self.standingon.vy + self.vy)
         else:
             self.rect.move_ip(self.vx, self.vy)
     def MoveDelta(self, x, y):
@@ -247,6 +247,7 @@ class Character(pygame.sprite.Sprite):
         self.SetHitWall(False)
     def Shoot(self):
         #shooting animation
+        
     #character physics
     def Accelerate(self):
         if self.hitwall:
