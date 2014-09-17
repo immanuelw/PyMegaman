@@ -49,8 +49,10 @@ pygame.mixer.music.play(-1, 0.0)
 pygame.display.set_caption('Py Mega Man 1')
 
 while True:
+    #Invincibility frams
     if char.cooldown > 0:
         char.cooldown -= 1
+
     environ[1].rects=[]
     gamesurf.fill(BLACK)
     g.DebugRender(gamesurf)
@@ -125,14 +127,14 @@ while True:
                 char.SetSad(False)
             elif ev.key == K_k:
                 char.Kill()
-            #Cycle through weapons
-            elif ev.key == K_l:
-                char.token = (char.token - 1) % len(weapons)
-            elif ev.key == K_r:
-                char.token = (char.token - 1) % len(weapons)
+            #Cycle through weapons #char.tokens is list of keys for weapons dict
+            elif ev.key == K_a:
+                char.weapon = (char.weapon - 1) % len(char.tokens)
+            elif ev.key == K_s:
+                char.weapon = (char.weapon + 1) % len(char.tokens)
             #Shoot button
             elif ev.key == K_z:
-                char.Shoot(char.weapons[char.token])
+                char.Shoot(char.weapons[char.tokens[char.weapon]])
         elif ev.type == KEYUP:
             if ev.key == K_LEFT:
                 char.SetGoLeft(False)

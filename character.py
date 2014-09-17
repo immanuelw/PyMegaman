@@ -82,7 +82,9 @@ class Character(pygame.sprite.Sprite):
         self.checkpoint=None
         self.hitcheckpoint=False
         self.teleportpoint=None
-        self.tokens = [0]
+        self.tokens = [0] #List of tokens acquired
+        self.weapons = {0:MegaBuster} #Dictionary of weapons
+        self.weapon = 0 #Index of weapon being used
         self.breakaway = 0
         self.SetColor(col)
         self.enttype=ENT_CHARACTER
@@ -423,6 +425,9 @@ class Character(pygame.sprite.Sprite):
             elif ent.enttype == ENT_TOKEN:
                 pygame.mixer.Sound('data//snd//sfx//souleyeminijingle.wav').play()
                 self.tokens.append(ent.token)
+                self.tokens.sort()
+                if ent.token not in self.tokens:
+                    self.weapons.update({ent.token:weapon[ent.token]})
             elif ent.enttype == ENT_CHECKPOINT:
                 self.SetCheckpointHere()
             elif ent.enttype == ENT_SCRIPTED:
