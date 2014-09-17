@@ -72,6 +72,9 @@ while True:
         if entity.enttype == ENT_ENEMY:
             if entity.health <= 0:
                 remove_ent.append(entity)
+        if entity.enttype == ENT_CHAR_BULLET or entity.enttype == ENT_ENEMY_BULLET:
+            if entity.lifetime <= 0:
+                remove_ent.append(entity)
         if entity.enttype == ENT_TOKEN:
             if entity.token in char.tokens:
                 remove_ent.append(entity)

@@ -113,8 +113,11 @@ class BulletEntity(MovingAnimatingEntity):
         self.ammo = ammo
         self.bp = bp
         self.sound = sound
+    def FadingLife(self):
+        self.lifetime -= 1
     def update(self, gamearea, env=None):
         MovingAnimatingEntity.update(self, gamearea, env)
+        FadingLife()
 
 class EnemyEntity(MovingAnimatingEntity):
     def __init__(self, images, frametime, dx, dy, etype=ENT_OBSTACLE, health, damage, defense, knockback):
