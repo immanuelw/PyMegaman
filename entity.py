@@ -24,9 +24,9 @@ class Entity(pygame.sprite.Sprite):
         surf.blit(self.image, self.rect.topleft)
     def SetPos(self, x, y):
         self.rect.center = (x, y)
-    def SetSpike(self, x, y):
+    def SetFromBL(self, x, y):
         self.rect.bottomleft = (x,y)
-    def SetSpikeU(self, x, y):
+    def SetFromTL(self, x, y):
         self.rect.topleft = (x,y)
 class TokenEntity(Entity):
     def __init__(self, image, etype=ENT_TOKEN, token):

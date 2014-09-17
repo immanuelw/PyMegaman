@@ -86,6 +86,8 @@ class Character(pygame.sprite.Sprite):
         self.weapons = {0:MegaBuster} #Dictionary of weapons
         self.weapon = 0 #Index of weapon being used
         self.breakaway = 0
+        self.x = 30 #location of character's x coordinate in pixel axis
+        self.y = 30 #location of character's y coordinate in pixel axis
         self.SetColor(col)
         self.enttype=ENT_CHARACTER
     def draw(self, surf):
@@ -245,9 +247,13 @@ class Character(pygame.sprite.Sprite):
         self.vy = 0
         self.SetHitFloor(False)
         self.SetHitWall(False)
-    def Shoot(self):
-        #shooting animation
-        
+    def Shoot(self, ent):
+        #shooting animation, ent is the bullet
+        #create bullet entity
+        bullet_x = 20 #pixels from left
+        bullet_y = 15 #pixels from bottom
+        ent.SetFromBL(char.x + bullet_x, char.y + bullet_y)
+
     #character physics
     def Accelerate(self):
         if self.hitwall:
