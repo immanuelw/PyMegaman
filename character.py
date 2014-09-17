@@ -423,11 +423,17 @@ class Character(pygame.sprite.Sprite):
             elif ent.enttype == ENT_OBSTACLE:
                 self.Kill()
             elif ent.enttype == ENT_TOKEN:
-                pygame.mixer.Sound('data//snd//sfx//souleyeminijingle.wav').play()
-                self.tokens.append(ent.token)
-                self.tokens.sort()
-                if ent.token not in self.tokens:
-                    self.weapons.update({ent.token:weapon[ent.token]})
+                if ent.token == TOKEN_HEALTH:
+                    char.health = min(char.health + ent.value, char.health_max)
+                #NEED TO FIX AMMO RELATION BETWEEN CHARACTER AND WEAPON
+                #elif ent.token == TOKEN_AMMO:
+                #    char.ammo = min(char.ammo + ent.value, char.ammo_max)
+                else:
+                    pygame.mixer.Sound('data//snd//sfx//souleyeminijingle.wav').play()
+                    self.tokens.append(ent.token)
+                    self.tokens.sort()
+                    if ent.token not in self.tokens:
+                        self.weapons.update({ent.token:weapon[ent.token]})
             elif ent.enttype == ENT_CHECKPOINT:
                 self.SetCheckpointHere()
             elif ent.enttype == ENT_SCRIPTED:
