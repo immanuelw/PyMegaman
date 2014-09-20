@@ -252,7 +252,9 @@ class Character(pygame.sprite.Sprite):
         #create bullet entity
         bullet_x = 20 #pixels from left
         bullet_y = 15 #pixels from bottom
-        ent.SetFromBL(char.x + bullet_x, char.y + bullet_y)
+        x = self.image.get_rect().x
+        y = self.image.get_rect().y
+        ent.SetFromBL(x + bullet_x, y + bullet_y)
 
     #character physics
     def Accelerate(self):
