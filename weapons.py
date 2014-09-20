@@ -26,7 +26,7 @@ FireToken = TokenEntity(?, ENT_TOKEN, 5)
 ElecToken = TokenEntity(?, ENT_TOKEN, 6)
 MagnetToken = TokenEntity(?, ENT_TOKEN, 7)
 
-MegaBuster = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 1e8, 30, sound)
+MegaBuster = BulletEntity(?, ?, 4, 0, ENT_CHAR_BULLET, 180, 0, 1, 10, 1e8, 30, sound)
 RollingCutter = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
 SuperArm = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
 IceSlasher = BulletEntity(?, ?, ?, ?, ENT_CHAR_BULLET, 180, 0, 1, 10, 20, 30, sound)
