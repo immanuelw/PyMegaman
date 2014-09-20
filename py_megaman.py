@@ -137,6 +137,7 @@ while True:
                 char.weapon = (char.weapon + 1) % len(char.tokens)
             #Shoot button
             elif ev.key == K_z:
+                environ[4].AddEntity(char.weapons[char.tokens[char.weapon]])
                 char.Shoot(char.weapons[char.tokens[char.weapon]])
         elif ev.type == KEYUP:
             if ev.key == K_LEFT:
